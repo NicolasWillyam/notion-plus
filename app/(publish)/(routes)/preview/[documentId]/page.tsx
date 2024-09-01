@@ -10,6 +10,7 @@ import { Toolbar } from "@/components/toolbar";
 import { Cover } from "@/components/cover";
 import { Skeleton } from "@/components/ui/skeleton";
 import NotPublished from "@/app/(main)/_components/not-published";
+import Container from "@/app/(main)/_components/container";
 
 interface DocumentIdPageProps {
   params: {
@@ -59,14 +60,14 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   return (
     <div className="pb-40">
       <Cover preview url={document.coverImage} />
-      <div className="md:max-w-3xl lg:max-w-4xl mx-auto">
+      <Container>
         <Toolbar preview initialData={document} />
         <Editor
           editable={false}
           onChange={onChange}
           initialContent={document.content}
         />
-      </div>
+      </Container>
     </div>
   );
 };

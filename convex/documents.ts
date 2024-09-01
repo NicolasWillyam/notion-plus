@@ -29,7 +29,7 @@ export const create = mutation({
   },
 });
 
-export const get = query({
+export const getUserId = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
 
@@ -39,9 +39,7 @@ export const get = query({
 
     const userId = identity.subject;
 
-    const documents = await ctx.db.query("documents").collect();
-
-    return documents;
+    return userId;
   },
 });
 
