@@ -48,6 +48,7 @@ export const get = query({
 export const archive = mutation({
   args: { id: v.id("documents") },
   handler: async (ctx, args) => {
+    // User Authentication
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -62,10 +63,12 @@ export const archive = mutation({
       throw new Error("Not found");
     }
 
+    // Authorization Check
     if (existingDocument.userId !== userId) {
       throw new Error("Unauthorized");
     }
 
+    // Defined to handle the archiving of documents and all of their children (sub-documents).
     const recursiveArchive = async (documentId: Id<"documents">) => {
       const children = await ctx.db
         .query("documents")
@@ -82,11 +85,12 @@ export const archive = mutation({
         await recursiveArchive(child._id);
       }
     };
-
+    // The document with the specified id is updated, setting its isArchived field to true, marking it as archived.
     const document = await ctx.db.patch(args.id, {
       isArchived: true,
     });
 
+    // Archiving all child documents recursively.
     recursiveArchive(args.id);
 
     return document;
