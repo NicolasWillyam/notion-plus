@@ -8,6 +8,7 @@ import { ModalProvider } from "@/components/providers/modal-provider";
 import { EdgeStoreProvider } from "@/lib/edgestore";
 
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={cn("bg-background dark:bg-[#1F1F1F]", inter.className)}>
         <ConvexClientProvider>
           <EdgeStoreProvider>
             <ThemeProvider
