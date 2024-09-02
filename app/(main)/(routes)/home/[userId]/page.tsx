@@ -15,11 +15,13 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/app/(main)/_components/container";
 import Link from "next/link";
 
-const HomePage = ({
-  parentDocumentId,
-}: {
-  parentDocumentId?: Id<"documents">;
-}) => {
+interface HomePageProps {
+  params: {
+    documentId: Id<"documents">;
+  };
+}
+
+const HomePage = ({ params }: HomePageProps) => {
   const router = useRouter();
   const { user } = useUser();
   const create = useMutation(api.documents.create);
@@ -37,7 +39,7 @@ const HomePage = ({
   };
 
   const documents = useQuery(api.documents.getSidebar, {
-    parentDocument: parentDocumentId,
+    parentDocument: params.documentId,
   });
 
   console.log(documents);
