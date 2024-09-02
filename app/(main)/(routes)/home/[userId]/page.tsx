@@ -15,7 +15,7 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/app/(main)/_components/container";
 import Link from "next/link";
 
-const DocumentsPage = ({
+const HomePage = ({
   parentDocumentId,
 }: {
   parentDocumentId?: Id<"documents">;
@@ -44,7 +44,7 @@ const DocumentsPage = ({
 
   return (
     <Container>
-      <div className="min-h-screen flex flex-col items-center space-y-4 p-16 pt-24 text-muted-foreground">
+      <div className="min-h-screen flex flex-col items-center space-y-4 md:p-16 md:py-24 p-8 py-16 text-muted-foreground">
         <Image
           src="/hero-illo.webp"
           height="400"
@@ -75,13 +75,10 @@ const DocumentsPage = ({
             </p>
           </div>
         </div>
-        <div className="w-full grid grid-cols-4 gap-2.5 mt-8 text-sm font-medium">
+        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8 text-sm font-medium">
           {documents?.map((_, id) => (
-            <Link href={`/documents/${_._id}`}>
-              <div
-                key={id}
-                className="w-full h-full rounded-xl bg-primary/5 hover:outline hover:outline-2 outline-primary/20"
-              >
+            <Link key={id} href={`/documents/${_._id}`}>
+              <div className="w-full h-full rounded-xl bg-primary/5 hover:outline hover:outline-2 outline-primary/20">
                 {_.coverImage ? (
                   <div
                     style={{ backgroundImage: `url("${_.coverImage}")` }}
@@ -123,4 +120,4 @@ const DocumentsPage = ({
   );
 };
 
-export default DocumentsPage;
+export default HomePage;
