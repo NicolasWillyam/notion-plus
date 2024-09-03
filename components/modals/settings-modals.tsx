@@ -46,6 +46,7 @@ import MySettingsTab from "../settings/my-settings-tab";
 import MyNotifications from "../settings/my-notifications-tab";
 import MyNotificationsTab from "../settings/my-notifications-tab";
 import MyConnectionsTab from "../settings/my-connections-tab";
+import LanguageAndRegionTab from "../settings/language-and-region-tab";
 
 export const SettingsModal = () => {
   const settings = useSettings();
@@ -70,7 +71,7 @@ export const SettingsModal = () => {
                   <p className="text-sm line-clamp-1 font-medium">
                     {user?.fullName}
                   </p>
-                  <p className="text-xs font-normal text-[10px] text-muted-foreground ">
+                  <p className="text-xs font-normal text-[10px] text-muted-foreground truncate">
                     {user?.emailAddresses[0].emailAddress}
                   </p>
                 </div>
@@ -177,6 +178,9 @@ export const SettingsModal = () => {
             </TabsContent>
             <TabsContent value="my-connections">
               <MyConnectionsTab />
+            </TabsContent>
+            <TabsContent value="language-and-region">
+              <LanguageAndRegionTab />
             </TabsContent>
           </div>
         </Tabs>
