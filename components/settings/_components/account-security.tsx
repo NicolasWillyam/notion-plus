@@ -3,13 +3,13 @@ import React from "react";
 import { Button } from "../../ui/button";
 import { Switch } from "../../ui/switch";
 import TitleContent from "./title-content";
+import HeadContent from "./head-content";
 
 const AccountSecurity = () => {
   const { user } = useUser();
   return (
     <div>
-      <p className="text-sm font-medium">Account security</p>
-      <hr className="mt-3 mb-4" />
+      <HeadContent label="Account security" />
       <div className="flex flex-col gap-4">
         <TitleContent
           title="Email"

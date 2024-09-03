@@ -49,7 +49,7 @@ export const SettingsModal = () => {
 
   return (
     <Dialog open={settings.isOpen} onOpenChange={settings.onClose}>
-      <DialogContent className="p-0 max-w-5xl md:w-[90vw] md:max-h-[90vh] sm:rounded-xl bg-background">
+      <DialogContent className="p-0 max-w-6xl md:w-[90vw] sm:rounded-x">
         <Tabs defaultValue="account" className="w-full flex p-0">
           <TabsList className="w-[240px] flex flex-col space-y-0.5 rounded-l-xl">
             <div className="flex flex-col space-y-2 pt-3 pb-1.5">
@@ -153,7 +153,7 @@ export const SettingsModal = () => {
               />
             </div> */}
           </TabsList>
-          <div className="h-[90vh] bg-background w-full py-10 px-16 text-primary overflow-y-scroll rounded-r-xl">
+          <div className="h-[85vh] bg-background w-full py-8 px-16 text-primary overflow-y-scroll rounded-r-xl">
             <TabsContent value="my-account">
               <MyAccountTab />
             </TabsContent>

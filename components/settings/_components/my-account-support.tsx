@@ -2,12 +2,12 @@ import React from "react";
 import { Button } from "../../ui/button";
 import { Switch } from "../../ui/switch";
 import { ChevronRight, ChevronsLeft } from "lucide-react";
+import HeadContent from "./head-content";
 
 const MyAccountSupport = () => {
   return (
     <div>
-      <p className="text-sm font-medium">Support</p>
-      <hr className="mt-3 mb-4" />
+      <HeadContent label="Support" />
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div className="w-full text-sm">

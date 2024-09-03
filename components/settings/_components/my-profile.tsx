@@ -3,13 +3,13 @@ import React from "react";
 import { Avatar, AvatarImage } from "../../ui/avatar";
 import { Button } from "../../ui/button";
 import { Input } from "../../ui/input";
+import HeadContent from "./head-content";
 
 const MyProfile = () => {
   const { user } = useUser();
   return (
     <div>
-      <p className="text-sm font-medium">My profile</p>
-      <hr className="mt-3 mb-4" />
+      <HeadContent label="My Profile" />
       <div className="flex gap-x-5 items-center">
         <div className=" flex flex-col gap-2">
           {user?.imageUrl ? (
