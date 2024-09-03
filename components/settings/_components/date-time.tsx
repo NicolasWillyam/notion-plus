@@ -50,11 +50,13 @@ const DateTime = () => {
                 variant="ghost"
                 size={"lg"}
                 className="px-2 text-sm font-normal h-7"
+                disabled
+                aria-readonly
               >
                 {value
                   ? frameworks.find((framework) => framework.value === value)
                       ?.label
-                  : "Choose time zone"}
+                  : frameworks[0].label}
                 <ChevronDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
               </Button>
             </PopoverTrigger>
