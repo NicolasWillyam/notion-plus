@@ -92,3 +92,24 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+/* Style the scrollbar track */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+/* Style the scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar handle */
+  border-radius: 10px; /* Roundness of the scrollbar handle */
+  border: 2px solid transparent; /* Optional: Space around the scrollbar handle */
+}
+
+/* Optional: Style the scrollbar track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the scrollbar track */
+  border-radius: 10px; /* Roundness of the scrollbar track */
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 8px;
+}
