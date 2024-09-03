@@ -66,7 +66,7 @@ export const TrashBox = () => {
   }
 
   return (
-    <div className="text-sm">
+    <div className="text-sm shadow-xl">
       <div className="flex items-center gap-x-1 p-2">
         <Input
           value={search}
@@ -75,7 +75,7 @@ export const TrashBox = () => {
           placeholder="Filter by page title..."
         />
       </div>
-      <div className="mt-2 px-1 pb-1">
+      <div className="mt-1 px-1 pb-1 h-[40vh] overflow-y-auto">
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
           No documents found.
         </p>
@@ -106,6 +106,11 @@ export const TrashBox = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full flex items-center">
+        <div className="w-full h-9 px-3 flex items-center text-xs bg-primary/5 border-t-[1px] text-muted-foreground">
+          Pages in Trash for over 30 days will be automatically deleted
+        </div>
       </div>
     </div>
   );
