@@ -93,3 +93,8 @@ body,
   }
 }
 
+/* Style the scrollbar track */
+::-webkit-scrollbar {
+  width: 0px; /* Width of the scrollbar */
+}
+

@@ -29,6 +29,7 @@ import {
   Settings,
   ShieldCheck,
   SlidersHorizontal,
+  SquareArrowUpRight,
   Users,
 } from "lucide-react";
 import { Item } from "@/app/(main)/_components/item";
@@ -42,6 +43,9 @@ import MyAccountSupport from "../settings/_components/my-account-support";
 import MyProfile from "../settings/_components/my-profile";
 import MyAccountTab from "../settings/my-account-tab";
 import MySettingsTab from "../settings/my-settings-tab";
+import MyNotifications from "../settings/my-notifications-tab";
+import MyNotificationsTab from "../settings/my-notifications-tab";
+import MyConnectionsTab from "../settings/my-connections-tab";
 
 export const SettingsModal = () => {
   const settings = useSettings();
@@ -49,7 +53,7 @@ export const SettingsModal = () => {
 
   return (
     <Dialog open={settings.isOpen} onOpenChange={settings.onClose}>
-      <DialogContent className="p-0 max-w-6xl md:w-[90vw] sm:rounded-x">
+      <DialogContent className="p-0 max-w-6xl md:w-[90vw] rounded-xl">
         <Tabs defaultValue="account" className="w-full flex p-0">
           <TabsList className="w-[240px] flex flex-col space-y-0.5 rounded-l-xl">
             <div className="flex flex-col space-y-2 pt-3 pb-1.5">
@@ -88,6 +92,14 @@ export const SettingsModal = () => {
               <SettingItem
                 label="My notifications"
                 icon={Bell}
+                // onClick={settings.onOpen}
+              />
+            </TabsTrigger>
+
+            <TabsTrigger value="my-connections">
+              <SettingItem
+                label="My Connections"
+                icon={SquareArrowUpRight}
                 // onClick={settings.onOpen}
               />
             </TabsTrigger>
@@ -153,12 +165,18 @@ export const SettingsModal = () => {
               />
             </div> */}
           </TabsList>
-          <div className="h-[85vh] bg-background w-full py-8 px-16 text-primary overflow-y-scroll rounded-r-xl">
+          <div className="h-[85vh] bg-background dark:bg-[#1F1F1F] w-full py-8 px-16 text-primary overflow-y-scroll rounded-r-xl">
             <TabsContent value="my-account">
               <MyAccountTab />
             </TabsContent>
             <TabsContent value="my-settings">
               <MySettingsTab />
+            </TabsContent>
+            <TabsContent value="my-notifications">
+              <MyNotificationsTab />
+            </TabsContent>
+            <TabsContent value="my-connections">
+              <MyConnectionsTab />
             </TabsContent>
           </div>
         </Tabs>

@@ -67,7 +67,7 @@ const MySettings = () => {
       <HeadContent label="My settings" />
       <div className="flex flex-col gap-4">
         <TitleContent
-          title="Email"
+          title="Appearance"
           subtitle="Customize how Notion looks on your device."
         >
           <Popover open={open} onOpenChange={setOpen}>
