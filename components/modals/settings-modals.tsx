@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { Avatar, AvatarImage } from "../ui/avatar";
-import { cn, timeCreatedSolved } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import {
   Bell,
