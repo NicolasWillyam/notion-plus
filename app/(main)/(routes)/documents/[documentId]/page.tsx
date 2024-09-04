@@ -59,15 +59,6 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 
   return (
     <>
-      <Head>
-        <title>My Page Title</title>
-        <meta
-          name="description"
-          content="This is the description of my page."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="pb-40">
         <Cover url={document.coverImage} />
         <Container>

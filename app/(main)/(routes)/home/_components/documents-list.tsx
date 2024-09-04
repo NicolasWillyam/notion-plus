@@ -6,7 +6,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Id } from "@/convex/_generated/dataModel";
-import { timeCreatedSolved } from "@/lib/utils";
+import { timeSolved } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
 import { Clock, File } from "lucide-react";
 import Link from "next/link";
@@ -73,7 +73,7 @@ const DocumentsList = ({ documents }: DocumentsListProps) => {
                           <AvatarImage src={user?.imageUrl} />
                         </Avatar>
                         <span className="text-start font-medium line-clamp-1 text-xs text-muted-foreground">
-                          {timeCreatedSolved(_._creationTime.toString())}
+                          {timeSolved(_._creationTime.toString())}
                         </span>
                       </div>
                     </TooltipTrigger>

@@ -34,11 +34,7 @@ const MyProfile = () => {
 
         <div className="text-xs flex flex-col gap-1 mb-9">
           <p className="text-muted-foreground">Preferred name</p>
-          <Input
-            type="text"
-            placeholder={"username"}
-            value={user?.firstName?.toString()}
-          />
+          <Input type="text" value={user?.firstName?.toString()} />
         </div>
       </div>
     </div>

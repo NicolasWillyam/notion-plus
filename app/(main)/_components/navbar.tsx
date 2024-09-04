@@ -11,6 +11,14 @@ import { Title } from "./title";
 import { Menu } from "./menu";
 import { Publish } from "./publish";
 import { Banner } from "./banner";
+import { timeSolved } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { useUser } from "@clerk/clerk-react";
 
 interface NavbarProps {
   isCollapsed: boolean;
@@ -19,6 +27,7 @@ interface NavbarProps {
 
 export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
   const params = useParams();
+  const { user } = useUser();
 
   const document = useQuery(api.documents.getById, {
     documentId: params.documentId as Id<"documents">,
@@ -52,6 +61,37 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
         <div className="flex items-center justify-between w-full">
           <Title initialData={document} />
           <div className="flex items-center gap-x-2">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <p className="text-muted-foreground/70 cursor-default text-sm">
+                    {timeSolved(document.updateTime.toString()) !== "0m"
+                      ? `Edited ${timeSolved(document.updateTime.toString())} ago`
+                      : "Edited just now"}
+                  </p>
+                </TooltipTrigger>
+                <TooltipContent
+                  align="start"
+                  className="text-xs p-2 px-2.5 text-muted-foreground space-y-0.5"
+                >
+                  <p>
+                    Edited by{" "}
+                    <span className="text-primary font-medium">
+                      {user?.username}{" "}
+                    </span>
+                    {timeSolved(document.updateTime.toString())} ago
+                  </p>
+                  <p>
+                    Created by{" "}
+                    <span className="text-primary font-medium">
+                      {user?.username}{" "}
+                    </span>
+                    {timeSolved(document._creationTime.toString())} ago
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
             <Publish initialData={document} />
             <Menu documentId={document._id} />
           </div>

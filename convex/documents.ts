@@ -23,6 +23,7 @@ export const create = mutation({
       userId,
       isArchived: false,
       isPublished: false,
+      updateTime: Date.now(),
     });
 
     return document;
@@ -293,10 +294,9 @@ export const update = mutation({
     }
 
     const userId = identity.subject;
-
     const { id, ...rest } = args;
 
-    const existingDocument = await ctx.db.get(args.id);
+    const existingDocument = await ctx.db.get(id);
 
     if (!existingDocument) {
       throw new Error("Not found");
@@ -306,8 +306,9 @@ export const update = mutation({
       throw new Error("Unauthorized");
     }
 
-    const document = await ctx.db.patch(args.id, {
+    const document = await ctx.db.patch(id, {
       ...rest,
+      updateTime: Date.now(), // Add updateTime with the current timestamp
     });
 
     return document;

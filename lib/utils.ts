@@ -5,9 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const timeCreatedSolved = (creationTime: string): string => {
+export const timeSolved = (time: string): string => {
   // Convert creationTime from string to number (assuming it's in milliseconds)
-  const creationTimeMs = parseFloat(creationTime);
+  const creationTimeMs = parseFloat(time);
 
   // Get the current time in milliseconds
   const currentTime = Date.now();
@@ -26,15 +26,15 @@ export const timeCreatedSolved = (creationTime: string): string => {
 
   // Define the formats
   if (timeDifferenceInMinutes < 60) {
-    return `${timeDifferenceInMinutes}m ago`;
+    return `${timeDifferenceInMinutes}m`;
   } else if (timeDifferenceInHours < 24) {
-    return `${timeDifferenceInHours}h ago`;
+    return `${timeDifferenceInHours}h`;
   } else if (timeDifferenceInDays < 7) {
-    return `${timeDifferenceInDays}d ago`;
+    return `${timeDifferenceInDays}d`;
   } else if (timeDifferenceInWeeks < 4) {
-    return `${timeDifferenceInWeeks}w ago`;
+    return `${timeDifferenceInWeeks}w`;
   } else if (timeDifferenceInMonths < 12) {
-    return `${timeDifferenceInMonths}mo ago`;
+    return `${timeDifferenceInMonths}mon`;
   } else {
     // Convert milliseconds to Date object for exact date formatting
     const creationDate = new Date(creationTimeMs);
