@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     icon: [
       {
         media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
-        href: "/logo.svg",
+        url: "/logo.png",
+        href: "/logo.png",
       },
       {
         media: "(prefers-color-scheme: dark)",
-        url: "/logo-dark.svg",
-        href: "/logo-dark.svg",
+        url: "/logo.png",
+        href: "/logo.png",
       },
     ],
   },
@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("bg-background dark:bg-[#1F1F1F]", inter.className)}>
+      <body className={cn("bg-background dark:bg-[#1F1F1F]")}>
         <ConvexClientProvider>
           <EdgeStoreProvider>
             <ThemeProvider
@@ -46,7 +46,7 @@ export default function RootLayout({
               defaultTheme="system"
               enableSystem
               disableTransitionOnChange
-              storageKey="jotion-theme-2"
+              storageKey="notion-theme-2"
             >
               <Toaster position="bottom-center" />
               <ModalProvider />

@@ -178,7 +178,7 @@ export const Navigation = () => {
               <Item label="Trash" icon={Trash} />
             </PopoverTrigger>
             <PopoverContent
-              className="p-0 w-72"
+              className="p-0 w-[420px] relative bottom-4 -left-4"
               side={isMobile ? "bottom" : "right"}
             >
               <TrashBox />

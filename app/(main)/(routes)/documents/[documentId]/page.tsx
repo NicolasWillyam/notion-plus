@@ -10,6 +10,7 @@ import { Toolbar } from "@/components/toolbar";
 import { Cover } from "@/components/cover";
 import { Skeleton } from "@/components/ui/skeleton";
 import Container from "@/app/(main)/_components/container";
+import Head from "next/head";
 
 interface DocumentIdPageProps {
   params: {
@@ -57,13 +58,15 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
   }
 
   return (
-    <div className="pb-40">
-      <Cover url={document.coverImage} />
-      <Container>
-        <Toolbar initialData={document} />
-        <Editor onChange={onChange} initialContent={document.content} />
-      </Container>
-    </div>
+    <>
+      <div className="pb-40">
+        <Cover url={document.coverImage} />
+        <Container>
+          <Toolbar initialData={document} />
+          <Editor onChange={onChange} initialContent={document.content} />
+        </Container>
+      </div>
+    </>
   );
 };
 
