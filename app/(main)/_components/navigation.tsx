@@ -9,12 +9,15 @@ import {
   Settings,
   Trash,
   Home,
+  Speaker,
+  Sparkles,
 } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { useMutation, useQuery } from "convex/react";
 import { toast } from "sonner";
+import { HiSparkles } from "react-icons/hi2";
 
 import { cn } from "@/lib/utils";
 import { api } from "@/convex/_generated/api";
@@ -32,6 +35,10 @@ import { DocumentList } from "./document-list";
 import { TrashBox } from "./trash-box";
 import { Navbar } from "./navbar";
 import { useUser } from "@clerk/clerk-react";
+import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Provider } from "@radix-ui/react-toast";
+import DocLabel from "./doc-label";
+import { FavouriteList } from "./favourite-list";
 
 export const Navigation = () => {
   const router = useRouter();
@@ -142,7 +149,7 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] px-2 py-1.5",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -151,7 +158,7 @@ export const Navigation = () => {
           onClick={collapse}
           role="button"
           className={cn(
-            "p-1 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-2 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
+            "p-1 mr-7 text-muted-foreground rounded-sm hover:bg-muted-foreground/10 hover:text-primary dark:hover:bg-neutral-600 absolute top-2 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
             isMobile && "opacity-100"
           )}
         >
@@ -159,19 +166,41 @@ export const Navigation = () => {
         </div>
         <div>
           <UserItem />
-          <Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-          <Item
-            label="Home"
-            icon={Home}
-            onClick={() => {
-              router.push(`/home/${user?.id}`);
-            }}
-          />
-          <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-          <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          <div className="mt-1.5">
+            <Item
+              label="Search"
+              icon={Search}
+              // isSearch
+              onClick={search.onOpen}
+            />
+            <Item
+              label="Notion AI"
+              icon={Sparkles}
+              // isSearch
+              onClick={search.onOpen}
+            />
+            <Item
+              label="Home"
+              icon={Home}
+              onClick={() => {
+                router.push(`/home/${user?.id}`);
+              }}
+            />
+
+            <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+            <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+          </div>
         </div>
-        <div className="mt-4">
-          <DocumentList />
+        <div className="space-y-3.5 mt-3.5">
+          <div className="">
+            <DocLabel label={"Favorites"} />
+            <FavouriteList />
+          </div>
+          <div className="">
+            <DocLabel label={"Private"} />
+            <DocumentList />
+          </div>
+
           <Item onClick={handleCreate} icon={Plus} label="Add a page" />
           <Popover>
             <PopoverTrigger className="w-full mt-4">

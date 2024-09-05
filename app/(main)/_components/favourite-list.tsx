@@ -11,16 +11,16 @@ import { cn } from "@/lib/utils";
 
 import { Item } from "./item";
 
-interface DocumentListProps {
+interface FavouriteListProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
   data?: Doc<"documents">[];
 }
 
-export const DocumentList = ({
+export const FavouriteList = ({
   parentDocumentId,
   level = 0,
-}: DocumentListProps) => {
+}: FavouriteListProps) => {
   const params = useParams();
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -32,7 +32,7 @@ export const DocumentList = ({
     }));
   };
 
-  const documents = useQuery(api.documents.getSidebar, {
+  const documents = useQuery(api.documents.getFavDocs, {
     parentDocument: parentDocumentId,
   });
 
@@ -83,7 +83,7 @@ export const DocumentList = ({
             expanded={expanded[document._id]}
           />
           {expanded[document._id] && (
-            <DocumentList parentDocumentId={document._id} level={level + 1} />
+            <FavouriteList parentDocumentId={document._id} level={level + 1} />
           )}
         </div>
       ))}

@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
-import { MenuIcon } from "lucide-react";
+import { Clock, MenuIcon, MessageSquareText, Star } from "lucide-react";
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -19,6 +19,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useUser } from "@clerk/clerk-react";
+import Edited from "./edited";
+import { Button } from "@/components/ui/button";
+import { IoStarOutline } from "react-icons/io5";
+import Starred from "./starred";
 
 interface NavbarProps {
   isCollapsed: boolean;
@@ -50,7 +54,7 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
 
   return (
     <>
-      <nav className="h-11 bg-background dark:bg-[#1F1F1F] px-3 py-2 w-full flex items-center gap-x-4">
+      <nav className="h-11 bg-background dark:bg-[#1F1F1F] px-2.5 py-2 w-full flex items-center gap-x-4">
         {isCollapsed && (
           <MenuIcon
             role="button"
@@ -60,39 +64,10 @@ export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
         )}
         <div className="flex items-center justify-between w-full">
           <Title initialData={document} />
-          <div className="flex items-center gap-x-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <p className="text-muted-foreground/70 cursor-default text-sm">
-                    {timeSolved(document.updateTime.toString()) !== "0m"
-                      ? `Edited ${timeSolved(document.updateTime.toString())} ago`
-                      : "Edited just now"}
-                  </p>
-                </TooltipTrigger>
-                <TooltipContent
-                  align="start"
-                  className="text-xs p-2 px-2.5 text-muted-foreground space-y-0.5"
-                >
-                  <p>
-                    Edited by{" "}
-                    <span className="text-primary font-medium">
-                      {user?.username}{" "}
-                    </span>
-                    {timeSolved(document.updateTime.toString())} ago
-                  </p>
-                  <p>
-                    Created by{" "}
-                    <span className="text-primary font-medium">
-                      {user?.username}{" "}
-                    </span>
-                    {timeSolved(document._creationTime.toString())} ago
-                  </p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
+          <div className="flex items-center gap-x-0.5">
+            <Edited initialData={document} />
             <Publish initialData={document} />
+            <Starred initialData={document} />
             <Menu documentId={document._id} />
           </div>
         </div>

@@ -10,7 +10,7 @@ import { Popover, PopoverContent } from "@/components/ui/popover";
 import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { PopoverTrigger } from "@radix-ui/react-popover";
-import { ChevronDown, ChevronsLeftRight } from "lucide-react";
+import { ChevronDown, ChevronsLeftRight, SquarePen } from "lucide-react";
 import React from "react";
 
 const UserItem = () => {
@@ -20,23 +20,26 @@ const UserItem = () => {
       <PopoverTrigger asChild>
         <div
           role="button"
-          className="flex items-center text-sm p-3 w-full hover:bg-primary/5"
+          className="flex items-center justify-between text-sm p-1.5 pl-2.5 w-full hover:bg-primary/5 rounded-sm"
         >
-          <div className="gap-x-2 flex items-center max-w-[150px]">
-            <Avatar className="h-5 w-5">
-              <AvatarImage src={user?.imageUrl} />
-            </Avatar>
-            <span className="text-start font-medium line-clamp-1">
-              {user?.fullName}
-            </span>
+          <div className="flex items-center">
+            <div className="gap-x-2 flex items-center max-w-[150px]">
+              <Avatar className="h-5 w-5 rounded-sm">
+                <AvatarImage src={user?.imageUrl} />
+              </Avatar>
+              <span className="text-start font-medium line-clamp-1">
+                {user?.username}
+              </span>
+            </div>
+            <ChevronDown className="ml-2 text-muted-foreground h-4 w-4" />
           </div>
-          <ChevronDown className="ml-2 text-muted-foreground h-4 w-4" />
+          <SquarePen className="w-4 h-4" />
         </div>
       </PopoverTrigger>
       <PopoverContent
         className="w-80 p-2"
         align="start"
-        alignOffset={11}
+        alignOffset={4}
         forceMount
       >
         <div className="flex flex-col space-y-2">

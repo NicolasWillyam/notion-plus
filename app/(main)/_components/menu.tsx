@@ -5,7 +5,7 @@ import { useUser } from "@clerk/clerk-react";
 import { useMutation, useQuery } from "convex/react";
 import { toast } from "sonner";
 import { MoreHorizontal, Trash } from "lucide-react";
-
+import { BsThreeDots } from "react-icons/bs";
 import { Id } from "@/convex/_generated/dataModel";
 import {
   DropdownMenu,
@@ -43,8 +43,8 @@ export const Menu = ({ documentId }: MenuProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="sm" variant="ghost">
-          <MoreHorizontal className="h-4 w-4" />
+        <Button size="icon" variant="ghost">
+          <BsThreeDots className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
