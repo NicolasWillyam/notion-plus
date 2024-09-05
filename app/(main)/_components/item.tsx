@@ -3,6 +3,7 @@
 import {
   ChevronDown,
   ChevronRight,
+  Inbox,
   LucideIcon,
   MoreHorizontal,
   Plus,
@@ -24,6 +25,14 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 interface ItemProps {
   id?: Id<"documents">;
@@ -32,6 +41,7 @@ interface ItemProps {
   active?: boolean;
   expanded?: boolean;
   isSearch?: boolean;
+  isInbox?: boolean;
   level?: number;
   onExpand?: () => void;
   label: string;
@@ -48,6 +58,7 @@ export const Item = ({
   active,
   documentIcon,
   isSearch,
+  isInbox,
   level = 0,
   onExpand,
   expanded,
@@ -108,74 +119,106 @@ export const Item = ({
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   return (
-    <div
-      onClick={onClick}
-      role="button"
-      style={{
-        paddingLeft: level ? `${level * 10 + 10}px` : "10px",
-      }}
-      className={cn(
-        "group min-h-[30px] text-sm py-1 pr-1.5 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium rounded-sm my-[1px]",
-        active && "bg-primary/5 text-primary"
-      )}
-    >
-      {!!id && (
-        <div
-          role="button"
-          className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
-          onClick={handleExpand}
-        >
-          <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
-        </div>
-      )}
-      {documentIcon ? (
-        <div className="shrink-0 mr-2.5 text-[18px]">{documentIcon}</div>
-      ) : (
-        <Icon className="shrink-0 h-[18px] w-[18px] mr-2.5 text-muted-foreground" />
-      )}
-      <span className="truncate">{label}</span>
-      {isSearch && (
-        <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-          <span className="text-xs">⌘</span>K
-        </kbd>
-      )}
-      {!!id && (
-        <div className="ml-auto flex items-center gap-x-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
-              <div
-                role="button"
-                className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
-              >
-                <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              className="w-60"
-              align="start"
-              side="right"
-              forceMount
-            >
-              <DropdownMenuItem onClick={onArchive}>
-                <Trash className="h-4 w-4 mr-2" />
-                Move to Trash
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <div className="text-xs text-muted-foreground p-2">
-                Last edited by: {user?.fullName}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+    <Sheet>
+      <div
+        onClick={onClick}
+        role="button"
+        style={{
+          paddingLeft: level ? `${level * 10 + 10}px` : "10px",
+        }}
+        className={cn(
+          "group min-h-[30px] text-sm py-1 pr-1.5 w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium rounded-sm my-[1px]",
+          active && "bg-primary/5 text-primary"
+        )}
+      >
+        {!!id && (
           <div
             role="button"
-            onClick={onCreate}
-            className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+            className="h-full rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 mr-1"
+            onClick={handleExpand}
           >
-            <Plus className="h-4 w-4 text-muted-foreground" />
+            <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
           </div>
-        </div>
-      )}
-    </div>
+        )}
+        {documentIcon ? (
+          <div className="shrink-0 mr-2.5 text-[18px]">{documentIcon}</div>
+        ) : (
+          <Icon className="shrink-0 h-[18px] w-[18px] mr-2.5 text-muted-foreground" />
+        )}
+        <SheetTrigger className="w-full p-0 truncate flex justify-start">
+          {label}
+        </SheetTrigger>
+        {/* <span className="truncate">{label}</span> */}
+        {isSearch && (
+          <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+            <span className="text-xs">⌘</span>K
+          </kbd>
+        )}
+
+        {isInbox && (
+          <SheetContent
+            side={"left"}
+            className="w-[400px] ml-60 px-4 py-3 border-border/80"
+          >
+            <SheetHeader>
+              <SheetTitle className="text-sm text-primary font-medium ">
+                Inbox
+              </SheetTitle>
+              <SheetDescription>
+                <div className="w-full flex flex-col justify-center items-center text-center mt-28 p-10">
+                  <Inbox strokeWidth={1.2} className="w-12 h-12" />
+                  <div className="mt-4">
+                    <p className="font-medium text-muted-foreground">
+                      You{"'"}re all caught up
+                    </p>
+                    <p className="mt-1 font-normal text-muted-foreground/70">
+                      You{"'"}ll be notified here for @mentions, page activity,
+                      and page invites
+                    </p>
+                  </div>
+                </div>
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        )}
+        {!!id && (
+          <div className="ml-auto flex items-center gap-x-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger onClick={(e) => e.stopPropagation()} asChild>
+                <div
+                  role="button"
+                  className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+                >
+                  <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-60"
+                align="start"
+                side="right"
+                forceMount
+              >
+                <DropdownMenuItem onClick={onArchive}>
+                  <Trash className="h-4 w-4 mr-2" />
+                  Move to Trash
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <div className="text-xs text-muted-foreground p-2">
+                  Last edited by: {user?.fullName}
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <div
+              role="button"
+              onClick={onCreate}
+              className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+            >
+              <Plus className="h-4 w-4 text-muted-foreground" />
+            </div>
+          </div>
+        )}
+      </div>
+    </Sheet>
   );
 };
 
