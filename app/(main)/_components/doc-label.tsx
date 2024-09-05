@@ -3,6 +3,7 @@ import { Doc, Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import { useQuery } from "convex/react";
 import React from "react";
+import { Item } from "./item";
 
 interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
@@ -18,16 +19,32 @@ export const DocLabel = ({
   const documents = useQuery(api.documents.getFavDocs, {
     parentDocument: parentDocumentId,
   });
-  if (label === "Favorites") {
-    const documents = useQuery(api.documents.getFavDocs, {
-      parentDocument: parentDocumentId,
-    });
-  }
 
-  if (label === "Private") {
-    const documents = useQuery(api.documents.getSidebar, {
-      parentDocument: parentDocumentId,
-    });
+  // if (label === "Favorites") {
+  //   const documents = useQuery(api.documents.getFavDocs, {
+  //     parentDocument: parentDocumentId,
+  //   });
+  // }
+
+  // if (label === "Private") {
+  //   const documents = useQuery(api.documents.getSidebar, {
+  //     parentDocument: parentDocumentId,
+  //   });
+  // }
+
+  console.log(documents);
+
+  if (documents === undefined) {
+    return (
+      <>
+        <Item.Skeleton level={level} />
+        {level === 0 && (
+          <>
+            <Item.Skeleton level={level} />
+          </>
+        )}
+      </>
+    );
   }
   return (
     <div>

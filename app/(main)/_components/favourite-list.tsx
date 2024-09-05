@@ -14,10 +14,12 @@ import { Item } from "./item";
 interface FavouriteListProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
+  label?: string;
   data?: Doc<"documents">[];
 }
 
 export const FavouriteList = ({
+  label,
   parentDocumentId,
   level = 0,
 }: FavouriteListProps) => {
@@ -56,23 +58,34 @@ export const FavouriteList = ({
 
   return (
     <>
-      <p
-        style={{
-          paddingLeft: level ? `${level * 12 + 24}px` : undefined,
-        }}
-        className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80 px-4 py-1",
-          expanded && "last:block",
-          level === 0 && "hidden"
-        )}
-      >
-        No pages created!
-      </p>
-
+      {label && documents.length > 0 && (
+        <div
+          className={cn(
+            "group min-h-[30px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
+          )}
+        >
+          {label}
+        </div>
+      )}
+      {level > 0 && (
+        <p
+          style={{
+            paddingLeft: level ? `${level * 12 + 24}px` : undefined,
+          }}
+          className={cn(
+            "hidden text-sm font-medium text-muted-foreground/80 px-4 py-1",
+            expanded && "last:block",
+            level === 0 && "hidden"
+          )}
+        >
+          No pages created!
+        </p>
+      )}
       {documents.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
+            type="favorite"
             onClick={() => onRedirect(document._id)}
             label={document.title}
             icon={FileIcon}

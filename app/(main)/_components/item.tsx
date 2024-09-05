@@ -27,6 +27,7 @@ import {
 
 interface ItemProps {
   id?: Id<"documents">;
+  type?: string;
   documentIcon?: string;
   active?: boolean;
   expanded?: boolean;
@@ -40,6 +41,7 @@ interface ItemProps {
 
 export const Item = ({
   id,
+  type,
   label,
   onClick,
   icon: Icon,
@@ -58,7 +60,9 @@ export const Item = ({
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
-    const promise = archive({ id }).then(() => router.push("/documents"));
+    const promise = archive({ id }).then((documentId) => {
+      router.push("/documents");
+    });
 
     toast.promise(promise, {
       loading: "Moving to trash...",
@@ -74,6 +78,8 @@ export const Item = ({
     onExpand?.();
   };
 
+  const update = useMutation(api.documents.update);
+
   const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
@@ -82,7 +88,13 @@ export const Item = ({
         if (!expanded) {
           onExpand?.();
         }
-        // router.push(`/documents/${documentId}`);
+        if (type === "favorite") {
+          update({
+            id: documentId,
+            isStared: true,
+          });
+        }
+        router.push(`/documents/${documentId}`);
       }
     );
 

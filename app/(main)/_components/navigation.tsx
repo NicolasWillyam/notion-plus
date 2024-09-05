@@ -149,7 +149,7 @@ export const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] px-2 py-1.5",
+          "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999] py-1.5",
           isResetting && "transition-all ease-in-out duration-300",
           isMobile && "w-0"
         )}
@@ -164,7 +164,7 @@ export const Navigation = () => {
         >
           <ChevronsLeft className="h-5 w-5" />
         </div>
-        <div>
+        <div className="mx-2">
           <UserItem />
           <div className="mt-1.5">
             <Item
@@ -190,29 +190,28 @@ export const Navigation = () => {
             <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
             <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
           </div>
-        </div>
-        <div className="space-y-3.5 mt-3.5">
-          <div className="">
-            <DocLabel label={"Favorites"} />
-            <FavouriteList />
-          </div>
-          <div className="">
-            <DocLabel label={"Private"} />
-            <DocumentList />
-          </div>
+          <div className="space-y-3.5 mt-3.5">
+            <div className="">
+              <FavouriteList label={"Favorites"} />
+            </div>
+            <div className="">
+              {/* <DocLabel label={"Private"} /> */}
+              <DocumentList label={"Private"} />
+            </div>
 
-          <Item onClick={handleCreate} icon={Plus} label="Add a page" />
-          <Popover>
-            <PopoverTrigger className="w-full mt-4">
-              <Item label="Trash" icon={Trash} />
-            </PopoverTrigger>
-            <PopoverContent
-              className="p-0 w-[420px] relative bottom-4 -left-4"
-              side={isMobile ? "bottom" : "right"}
-            >
-              <TrashBox />
-            </PopoverContent>
-          </Popover>
+            <Item onClick={handleCreate} icon={Plus} label="Add a page" />
+            <Popover>
+              <PopoverTrigger className="w-full mt-4">
+                <Item label="Trash" icon={Trash} />
+              </PopoverTrigger>
+              <PopoverContent
+                className="p-0 w-[420px] relative bottom-4 -left-4"
+                side={isMobile ? "bottom" : "right"}
+              >
+                <TrashBox />
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
         <div
           onMouseDown={handleMouseDown}
@@ -236,7 +235,7 @@ export const Navigation = () => {
               <MenuIcon
                 onClick={resetWidth}
                 role="button"
-                className="h-6 w-6 text-muted-foreground"
+                className="h-5 w-5 text-muted-foreground"
               />
             )}
           </nav>

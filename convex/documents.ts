@@ -141,7 +141,12 @@ export const getFavDocs = query({
       .withIndex("by_user_parent", (q) =>
         q.eq("userId", userId).eq("parentDocument", args.parentDocument)
       )
-      .filter((q) => q.eq(q.field("isStared"), true))
+      .filter((q) =>
+        q.and(
+          q.eq(q.field("isStared"), true), // isStared is true
+          q.eq(q.field("isArchived"), false) // isArchived is false
+        )
+      )
       .order("desc")
       .collect();
 

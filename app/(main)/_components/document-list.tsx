@@ -15,11 +15,13 @@ interface DocumentListProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
   data?: Doc<"documents">[];
+  label?: string;
 }
 
 export const DocumentList = ({
   parentDocumentId,
   level = 0,
+  label,
 }: DocumentListProps) => {
   const params = useParams();
   const router = useRouter();
@@ -35,6 +37,8 @@ export const DocumentList = ({
   const documents = useQuery(api.documents.getSidebar, {
     parentDocument: parentDocumentId,
   });
+
+  console.log("dad", documents);
 
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
@@ -56,6 +60,15 @@ export const DocumentList = ({
 
   return (
     <>
+      {label && (
+        <div
+          className={cn(
+            "group min-h-[30px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
+          )}
+        >
+          {label}
+        </div>
+      )}
       <p
         style={{
           paddingLeft: level ? `${level * 12 + 24}px` : undefined,
