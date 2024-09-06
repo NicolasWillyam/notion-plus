@@ -16,7 +16,7 @@ const UpcomingEvents = () => {
     <div className="w-full space-y-4 text-muted-foreground">
       <div className="w-full flex justify-between items-center">
         <div className="flex items-center text-muted-foreground">
-          <CalendarDays size={24} className="mx-2.5 text-muted-foreground/80" />
+          <CalendarDays size={20} className="mx-2.5 text-muted-foreground/80" />
           <p className="w-full text-left text-xs font-medium">
             Upcomming events
           </p>

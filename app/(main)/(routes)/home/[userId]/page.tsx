@@ -18,6 +18,8 @@ import DocumentsList from "../_components/documents-list";
 import Head from "next/head";
 import LearnList from "../_components/learn-list";
 import UpcomingEvents from "../_components/upcoming-events";
+import HomeViews from "../_components/home-views";
+import FeatureTemplates from "../_components/feature-templates";
 
 interface HomePageProps {
   params: {
@@ -59,6 +61,8 @@ const HomePage = ({ params }: HomePageProps) => {
           <DocumentsList documents={documents} />
           <LearnList />
           <UpcomingEvents />
+          <HomeViews />
+          <FeatureTemplates />
         </div>
       </Container>
     </>
