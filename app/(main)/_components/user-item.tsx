@@ -12,10 +12,17 @@ import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu";
 import { PopoverTrigger } from "@radix-ui/react-popover";
 import { useMutation } from "convex/react";
-import { ChevronDown, ChevronsLeftRight, SquarePen } from "lucide-react";
+import {
+  Check,
+  ChevronDown,
+  ChevronsLeftRight,
+  MoreHorizontal,
+  SquarePen,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
+import AccountCard from "./account-card";
 
 const UserItem = () => {
   const { user } = useUser();
@@ -57,43 +64,47 @@ const UserItem = () => {
           </div>
         </PopoverTrigger>
         <PopoverContent
-          className="w-80 p-2"
+          className="w-80 p-0"
           align="start"
           alignOffset={4}
           forceMount
         >
-          <div className="flex flex-col space-y-2">
-            <p className="text-xs font-medium leading-none text-muted-foreground p-2">
-              {user?.emailAddresses[0].emailAddress}
-            </p>
-            <div className="flex items-center gap-x-4 cursor-pointer px-2 pb-2">
-              <div className="rounded-md bg-secondary p-1">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={user?.imageUrl} />
-                </Avatar>
-              </div>
-              <div className="space-y-0.5">
-                <p className="text-sm line-clamp-1 font-medium">
-                  {user?.fullName}
+          <div className="flex flex-col">
+            <div className="py-2.5">
+              <div className="flex items-center justify-between px-3 pb-2">
+                <p className="text-xs font-medium leading-none text-muted-foreground text-[11px] ">
+                  {user?.emailAddresses[0].emailAddress}
                 </p>
-                <p className="text-xs font-normal text-[10px] text-muted-foreground ">
-                  Free Plan
-                </p>
+                <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
               </div>
+              <AccountCard
+                name={user?.fullName}
+                typePlan="free"
+                typeAccount="user"
+                member={1}
+                isActived={true}
+              />
+              <AccountCard
+                typeAccount="workspace"
+                name="Hanoi University of Science and Technology (HUST)"
+                typePlan="pro"
+                member={2308}
+                isActived={false}
+              />
             </div>
             <hr />
-            <div className="w-full text-muted-foreground ">
+            <div className="w-full text-muted-foreground p-1.5">
               <Button
                 variant={"ghost"}
                 size={"sm"}
-                className="text-xs w-full justify-start h-8"
+                className="text-xs w-full justify-start px-3"
               >
                 Create work account
               </Button>
               <Button
                 variant={"ghost"}
                 size={"sm"}
-                className="text-xs w-full justify-start h-8"
+                className="text-xs w-full justify-start px-3"
               >
                 Add another account
               </Button>
@@ -101,11 +112,21 @@ const UserItem = () => {
                 <Button
                   variant={"ghost"}
                   size={"sm"}
-                  className="text-xs w-full justify-start h-8"
+                  className="text-xs w-full justify-start px-3"
                 >
                   Logout
                 </Button>
               </SignOutButton>
+            </div>
+            <hr />
+            <div className="w-full text-muted-foreground p-1.5">
+              <Button
+                variant={"ghost"}
+                size={"sm"}
+                className="text-xs w-full justify-start px-3 h-7"
+              >
+                Get Mac app
+              </Button>
             </div>
           </div>
         </PopoverContent>
