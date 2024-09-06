@@ -49,7 +49,7 @@ export const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
-
+  console.log("params", params);
   const { user } = useUser();
 
   const isResizingRef = useRef(false);
@@ -57,6 +57,7 @@ export const Navigation = () => {
   const navbarRef = useRef<ElementRef<"div">>(null);
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
+  const [isActived, setIsActived] = useState(false);
 
   useEffect(() => {
     if (isMobile) {
@@ -184,8 +185,10 @@ export const Navigation = () => {
               label="Home"
               icon={Home}
               onClick={() => {
-                router.push(`/home/${user?.id}`);
+                setIsActived((prev) => !prev); // Toggle `isActived` state
+                router.push(`/home/${user?.id}`); // Navigate to user's home page
               }}
+              active={params.userId === user?.id}
             />
             <Item
               label="Inbox"
@@ -197,7 +200,7 @@ export const Navigation = () => {
             />
 
             <Item label="Settings" icon={Settings} onClick={settings.onOpen} />
-            <Item onClick={handleCreate} label="New page" icon={PlusCircle} />
+            {/* <Item onClick={handleCreate} label="New page" icon={PlusCircle} /> */}
           </div>
           <div className="space-y-3.5 mt-3.5">
             <div className="">

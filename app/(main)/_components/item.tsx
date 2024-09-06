@@ -140,12 +140,13 @@ export const Item = ({
             <ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
           </div>
         )}
-        {documentIcon ? (
-          <div className="shrink-0 mr-2.5 text-[18px]">{documentIcon}</div>
-        ) : (
-          <Icon className="shrink-0 h-[18px] w-[18px] mr-2.5 text-muted-foreground" />
-        )}
+
         <SheetTrigger className="w-full p-0 truncate flex justify-start">
+          {documentIcon ? (
+            <div className="shrink-0 mr-2.5 text-[18px]">{documentIcon}</div>
+          ) : (
+            <Icon className="shrink-0 h-[18px] w-[18px] mr-2.5" />
+          )}
           {label}
         </SheetTrigger>
         {/* <span className="truncate">{label}</span> */}
