@@ -61,7 +61,7 @@ export const FavouriteList = ({
       {label && documents.length > 0 && (
         <div
           className={cn(
-            "group min-h-[30px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
+            "group min-h-[27px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
           )}
         >
           {label}

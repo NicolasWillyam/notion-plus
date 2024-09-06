@@ -72,7 +72,7 @@ export const TrashBox = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="h-7 px-2 focus-visible:ring-transparent bg-secondary"
-          placeholder="Filter by page title..."
+          placeholder="Search pages in Trash"
         />
       </div>
       <div className="mt-1 px-1 pb-1 h-[40vh] overflow-y-auto">

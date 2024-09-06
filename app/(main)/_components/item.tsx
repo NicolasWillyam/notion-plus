@@ -141,7 +141,7 @@ export const Item = ({
           </div>
         )}
 
-        <SheetTrigger className="w-full p-0 truncate flex justify-start">
+        <SheetTrigger className="w-fit p-0 truncate flex justify-start mr-2.5">
           {documentIcon ? (
             <div className="shrink-0 mr-2.5 text-[18px]">{documentIcon}</div>
           ) : (

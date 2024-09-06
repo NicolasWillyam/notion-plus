@@ -38,8 +38,6 @@ export const DocumentList = ({
     parentDocument: parentDocumentId,
   });
 
-  console.log("dad", documents);
-
   const onRedirect = (documentId: string) => {
     router.push(`/documents/${documentId}`);
   };
