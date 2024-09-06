@@ -15,7 +15,13 @@ const MyConnections = ({ name, desc, logo }: ConnectionProps) => {
       className="p-3 h-auto flex flex-col justify-between items-start space-y-4 text-left text-wrap rounded-xl"
     >
       <div className="flex flex-col gap-1 p-1">
-        <Image src={logo} width={28} height={28} alt={name} />
+        <Image
+          src={logo}
+          width={28}
+          height={28}
+          alt={name}
+          className="rounded-md"
+        />
         <p className="font-medium mt-2.5">{name}</p>
         <p className="text-xs text-muted-foreground">{desc}</p>
         <p className="text-muted-foreground text-[9px] mt-0.5 px-1.5 py-0.5 bg-primary/10 w-fit leading-none rounded">

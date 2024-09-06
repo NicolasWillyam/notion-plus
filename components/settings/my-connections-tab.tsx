@@ -7,6 +7,8 @@ import { Button } from "../ui/button";
 import MyConnections from "./_components/my-connections";
 import Slack from "@/public/icons/slack.webp";
 import GoogleDrive from "@/public/icons/google-drive.png";
+import Team from "@/public/icons/microsoft-team.png";
+import eHust from "@/public/icons/ehust.png";
 
 const MyConnectionsTab = () => {
   return (
@@ -25,9 +27,9 @@ const MyConnectionsTab = () => {
             logo={GoogleDrive}
           />
           <MyConnections
-            name="Figma"
-            desc="View Figma designs directly in Notion"
-            logo={Slack}
+            name="Teams"
+            desc="Provides chat, meetings, notes, and attachments. "
+            logo={Team}
           />
         </div>
       </div>

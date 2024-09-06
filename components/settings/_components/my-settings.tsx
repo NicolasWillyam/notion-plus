@@ -70,8 +70,8 @@ const MySettings = () => {
           title="Appearance"
           subtitle="Customize how Notion looks on your device."
         >
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size={"lg"}
@@ -83,8 +83,8 @@ const MySettings = () => {
                   : "User system setting"}
                 <ChevronDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
               </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[240px] p-0" align="end">
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[240px] p-0" align="end">
               <Command>
                 <CommandList>
                   <CommandGroup>
@@ -115,8 +115,8 @@ const MySettings = () => {
                   </CommandGroup>
                 </CommandList>
               </Command>
-            </PopoverContent>
-          </Popover>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </TitleContent>
 
         <TitleContent
@@ -130,7 +130,7 @@ const MySettings = () => {
           title=""
           subtitle="If installed, macOS will open links to Notion in the desktop app, even if this setting is turned off. To disable that behavior, enable 'Open Notion links in browser' in your app."
         >
-          <Button variant={"outline"} size={"sm"}>
+          <Button variant={"outline"} size={"md"}>
             Set in app
           </Button>
         </TitleContent>

@@ -41,7 +41,7 @@ const DateTime = () => {
           title="Open links in desktop app"
           subtitle="You must have the macOS app installed."
         >
-          <Switch />
+          <Switch defaultChecked={true} />
         </TitleContent>
         <TitleContent title="Time Zone" subtitle="Current time zone setting.">
           <Popover open={open} onOpenChange={setOpen}>

@@ -6,9 +6,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Id } from "@/convex/_generated/dataModel";
-import { timeSolved } from "@/lib/utils";
+import { cn, timeSolved } from "@/lib/utils";
 import { useUser } from "@clerk/clerk-react";
-import { Clock, File } from "lucide-react";
+import { Clock, File, FileText } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 
@@ -33,24 +33,29 @@ const DocumentsList = ({ documents }: DocumentsListProps) => {
   const { user } = useUser();
 
   return (
-    <>
-      <div className="w-full flex justify-between items-center pt-20">
-        <div className="flex items-center">
-          <Clock className="w-6 h-6 mx-2" />
-          <p className="w-full text-left text-sm font-medium">Recent Visited</p>
+    <div className="w-full space-y-4">
+      <div className="w-full flex justify-between items-center">
+        <div className="flex items-center text-muted-foreground">
+          <Clock
+            strokeWidth={3}
+            className="w-4 h-4 mx-2.5 text-muted-foreground/80"
+          />
+          <p className="w-full text-left text-xs font-medium">
+            Recently visited
+          </p>
         </div>
       </div>
-      <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-8 text-sm font-medium">
+      <div className="w-full grid grid-cols-2 md:grid-cols-5 gap-4 text-sm font-medium">
         {documents?.map((_, id) => (
           <Link key={id} href={`/documents/${_._id}`}>
-            <div className="w-full h-full rounded-xl hover:outlie border hover:scale-105 transition-all  duration-300 delay-150">
+            <div className="w-full h-full rounded-xl hover:outlie border hover:scale-110 transition-all duration-300 delay-150">
               {_.coverImage ? (
                 <div
                   style={{ backgroundImage: `url("${_.coverImage}")` }}
-                  className="h-20 w-full rounded-t-xl bg-cover bg-center"
+                  className="h-16 w-full rounded-t-xl bg-cover bg-center"
                 />
               ) : (
-                <div className="h-20 w-full bg-primary/5 rounded-t-xl" />
+                <div className="h-16 w-full bg-primary/5 rounded-t-xl" />
               )}
 
               <div className=" p-3 px-4 space-y-2 flex flex-col justify-between">
@@ -59,12 +64,15 @@ const DocumentsList = ({ documents }: DocumentsListProps) => {
                     {_.icon}
                   </p>
                 ) : (
-                  <div className="w-9 h-9 -ml-1 -mt-7 flex items-center justify-center">
-                    <File className="h-6 w-6 text-muted-foreground" />
+                  <div className="w-9 h-9 -ml-2 -mt-7 flex items-center justify-center">
+                    <FileText
+                      fill="white"
+                      className="h-7 w-7 text-muted-foreground/80"
+                    />
                   </div>
                 )}
 
-                <p className="py-3 truncate">{_.title}</p>
+                <p className="pb-3.5 truncate">{_.title}</p>
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger className="text-left">
@@ -73,7 +81,7 @@ const DocumentsList = ({ documents }: DocumentsListProps) => {
                           <AvatarImage src={user?.imageUrl} />
                         </Avatar>
                         <span className="text-start font-medium line-clamp-1 text-xs text-muted-foreground">
-                          {timeSolved(_._creationTime.toString())}
+                          {timeSolved(_._creationTime.toString())} ago
                         </span>
                       </div>
                     </TooltipTrigger>
@@ -90,7 +98,7 @@ const DocumentsList = ({ documents }: DocumentsListProps) => {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

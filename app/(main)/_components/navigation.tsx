@@ -178,8 +178,7 @@ export const Navigation = () => {
             <Item
               label="Notion AI"
               icon={Sparkles}
-              // isSearch
-              onClick={search.onOpen}
+              // onClick={search.onOpen}
             />
             <Item
               label="Home"
