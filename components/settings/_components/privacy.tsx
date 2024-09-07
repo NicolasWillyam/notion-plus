@@ -169,7 +169,7 @@ const Privacy = () => {
           title="Profile discoverability"
           subtitle="Users with your email can see your name and profile picture when inviting you to a new workspace."
         >
-          <Switch />
+          <Switch defaultChecked={true} />
         </TitleContent>
       </div>
     </div>

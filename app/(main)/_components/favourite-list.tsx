@@ -11,18 +11,18 @@ import { cn } from "@/lib/utils";
 
 import { Item } from "./item";
 
-interface DocumentListProps {
+interface FavouriteListProps {
   parentDocumentId?: Id<"documents">;
   level?: number;
-  data?: Doc<"documents">[];
   label?: string;
+  data?: Doc<"documents">[];
 }
 
-export const DocumentList = ({
+export const FavouriteList = ({
+  label,
   parentDocumentId,
   level = 0,
-  label,
-}: DocumentListProps) => {
+}: FavouriteListProps) => {
   const params = useParams();
   const router = useRouter();
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
@@ -34,7 +34,7 @@ export const DocumentList = ({
     }));
   };
 
-  const documents = useQuery(api.documents.getSidebar, {
+  const documents = useQuery(api.documents.getFavDocs, {
     parentDocument: parentDocumentId,
   });
 
@@ -58,32 +58,34 @@ export const DocumentList = ({
 
   return (
     <>
-      {label && (
+      {label && documents.length > 0 && (
         <div
           className={cn(
-            "group min-h-[30px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
+            "group min-h-[27px] text-xs py-1 px-2 w-full flex items-center text-muted-foreground font-medium"
           )}
         >
           {label}
         </div>
       )}
-      <p
-        style={{
-          paddingLeft: level ? `${level * 12 + 24}px` : undefined,
-        }}
-        className={cn(
-          "hidden text-sm font-medium text-muted-foreground/80 px-4 py-1",
-          expanded && "last:block",
-          level === 0 && "hidden"
-        )}
-      >
-        No pages created!
-      </p>
-
+      {level > 0 && (
+        <p
+          style={{
+            paddingLeft: level ? `${level * 12 + 24}px` : undefined,
+          }}
+          className={cn(
+            "hidden text-sm font-medium text-muted-foreground/80 px-4 py-1",
+            expanded && "last:block",
+            level === 0 && "hidden"
+          )}
+        >
+          No pages created!
+        </p>
+      )}
       {documents.map((document) => (
         <div key={document._id}>
           <Item
             id={document._id}
+            type="favorite"
             onClick={() => onRedirect(document._id)}
             label={document.title}
             icon={FileIcon}
@@ -94,7 +96,7 @@ export const DocumentList = ({
             expanded={expanded[document._id]}
           />
           {expanded[document._id] && (
-            <DocumentList parentDocumentId={document._id} level={level + 1} />
+            <FavouriteList parentDocumentId={document._id} level={level + 1} />
           )}
         </div>
       ))}

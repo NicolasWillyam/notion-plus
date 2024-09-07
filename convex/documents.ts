@@ -23,6 +23,7 @@ export const create = mutation({
       userId,
       isArchived: false,
       isPublished: false,
+      isStared: false,
       updateTime: Date.now(),
     });
 
@@ -115,6 +116,37 @@ export const getSidebar = query({
         q.eq("userId", userId).eq("parentDocument", args.parentDocument)
       )
       .filter((q) => q.eq(q.field("isArchived"), false))
+      .order("desc")
+      .collect();
+
+    return documents;
+  },
+});
+
+export const getFavDocs = query({
+  args: {
+    parentDocument: v.optional(v.id("documents")),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not authenticated");
+    }
+
+    const userId = identity.subject;
+
+    const documents = await ctx.db
+      .query("documents")
+      .withIndex("by_user_parent", (q) =>
+        q.eq("userId", userId).eq("parentDocument", args.parentDocument)
+      )
+      .filter((q) =>
+        q.and(
+          q.eq(q.field("isStared"), true), // isStared is true
+          q.eq(q.field("isArchived"), false) // isArchived is false
+        )
+      )
       .order("desc")
       .collect();
 
@@ -285,6 +317,7 @@ export const update = mutation({
     coverImage: v.optional(v.string()),
     icon: v.optional(v.string()),
     isPublished: v.optional(v.boolean()),
+    isStared: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

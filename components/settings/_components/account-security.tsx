@@ -15,7 +15,7 @@ const AccountSecurity = () => {
           title="Email"
           subtitle={user?.emailAddresses[0]?.emailAddress}
         >
-          <Button variant={"outline"} size={"sm"}>
+          <Button variant={"outline"} size={"md"}>
             Change email
           </Button>
         </TitleContent>

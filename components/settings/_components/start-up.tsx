@@ -23,7 +23,6 @@ import {
 import { cn } from "@/lib/utils";
 
 const StartUp = () => {
-  const { setTheme } = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const frameworks = [
@@ -51,8 +50,8 @@ const StartUp = () => {
           title="Open on start"
           subtitle="Choose what to show when Notion starts or when you switch workspaces."
         >
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
+          <DropdownMenu open={open} onOpenChange={setOpen}>
+            <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
                 size={"lg"}
@@ -61,11 +60,11 @@ const StartUp = () => {
                 {value
                   ? frameworks.find((framework) => framework.value === value)
                       ?.label
-                  : "User system setting"}
+                  : frameworks[0].label}
                 <ChevronDown className="ml-1 h-4 w-4 shrink-0 opacity-50" />
               </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[240px] p-0" align="end">
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-[240px] p-0" align="end">
               <Command>
                 <CommandList>
                   <CommandGroup>
@@ -96,8 +95,8 @@ const StartUp = () => {
                   </CommandGroup>
                 </CommandList>
               </Command>
-            </PopoverContent>
-          </Popover>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </TitleContent>
       </div>
     </div>

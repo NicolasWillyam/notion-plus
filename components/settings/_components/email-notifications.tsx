@@ -37,7 +37,7 @@ const EmailNotifications = () => {
           title="Announcements and update emails"
           subtitle="Receive occasional emails about product launches and new features from Notion"
         >
-          <Button variant={"outline"} size={"sm"} className="gap-2 pl-2">
+          <Button variant={"outline"} size={"md"} className="gap-2 pl-2">
             <SquareArrowOutUpRight className="w-4 h-4" />
             Manage settings
           </Button>

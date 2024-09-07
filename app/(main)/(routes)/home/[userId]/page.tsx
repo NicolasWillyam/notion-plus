@@ -16,6 +16,10 @@ import Container from "@/app/(main)/_components/container";
 import Link from "next/link";
 import DocumentsList from "../_components/documents-list";
 import Head from "next/head";
+import LearnList from "../_components/learn-list";
+import UpcomingEvents from "../_components/upcoming-events";
+import HomeViews from "../_components/home-views";
+import FeatureTemplates from "../_components/feature-templates";
 
 interface HomePageProps {
   params: {
@@ -50,30 +54,15 @@ const HomePage = ({ params }: HomePageProps) => {
         <title>Home</title>
       </Head>
       <Container>
-        <div className="min-h-screen flex flex-col items-center space-y-4 md:p-16 md:py-24 p-8 py-16 text-muted-foreground">
-          <Image
-            src="/hero-illo.webp"
-            height="400"
-            width="400"
-            alt="Empty"
-            className="dark:hidden"
-          />
-          <Image
-            src="/empty-dark.png"
-            height="300"
-            width="300"
-            alt="Empty"
-            className="hidden dark:block"
-          />
-          <h2 className="text-2xl font-semibold">
-            Welcome to Notion, {user?.firstName}
+        <div className="min-h-screen flex flex-col items-center space-y-11 py-16">
+          <h2 className="text-3xl font-semibold">
+            Good morning, {user?.firstName}
           </h2>
-          <Button onClick={onCreate}>
-            <PlusCircle className="h-4 w-4 mr-2" />
-            Create a note
-          </Button>
-
           <DocumentsList documents={documents} />
+          <LearnList />
+          <UpcomingEvents />
+          <HomeViews />
+          <FeatureTemplates />
         </div>
       </Container>
     </>

@@ -56,8 +56,8 @@ export const SettingsModal = () => {
     <Dialog open={settings.isOpen} onOpenChange={settings.onClose}>
       <DialogContent className="p-0 max-w-6xl md:w-[90vw] rounded-xl">
         <Tabs defaultValue="account" className="w-full flex p-0">
-          <TabsList className="w-[240px] flex flex-col space-y-0.5 rounded-l-xl">
-            <div className="flex flex-col space-y-2 pt-3 pb-1.5">
+          <TabsList className="w-[240px] flex flex-col rounded-l-xl">
+            <div className="flex flex-col space-y-2 pt-2 pb-1.5">
               <p className="text-xs font-medium text-muted-foreground px-4">
                 Account
               </p>
@@ -67,8 +67,8 @@ export const SettingsModal = () => {
                     <AvatarImage src={user?.imageUrl} />
                   </Avatar>
                 </div>
-                <div className="space-y-0.5">
-                  <p className="text-sm line-clamp-1 font-medium">
+                <div className="">
+                  <p className="text-sm line-clamp-1 font-medium text-primary">
                     {user?.fullName}
                   </p>
                   <p className="text-xs font-normal text-[10px] text-muted-foreground truncate">
@@ -166,7 +166,7 @@ export const SettingsModal = () => {
               />
             </div> */}
           </TabsList>
-          <div className="h-[85vh] bg-background dark:bg-[#1F1F1F] w-full py-8 px-16 text-primary overflow-y-scroll rounded-r-xl">
+          <div className="h-[85vh] bg-background dark:bg-[#1F1F1F] w-full py-7 px-14 text-primary overflow-y-scroll rounded-r-xl">
             <TabsContent value="my-account">
               <MyAccountTab />
             </TabsContent>

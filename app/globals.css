@@ -98,8 +98,3 @@ body,
   }
 }
 
-/* Style the scrollbar track */
-::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
-}
-
